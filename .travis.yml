@@ -1,0 +1,22 @@
+language: python
+
+python:
+  - "3.6.0"
+
+services:
+  - postgresql
+
+env:
+  - SECRET_KEY='7pgozr2jn7zs_o%i8id6=rddie!*0f0qy3$oy$(8231i^4*@u3'
+
+before_script:
+  - psql -c 'create database authors_prime;' -U postgres
+  - python manage.py makemigrations
+  - python manage.py migrate
+
+install:
+  - pip install -r requirements.txt
+  - pip install coverage
+ 
+script:
+  - python manage.py test
