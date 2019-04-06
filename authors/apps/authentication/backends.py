@@ -1,7 +1,7 @@
 import jwt
 from django.conf import settings
 from rest_framework import authentication, exceptions
-from .models import User
+from authors.apps.authentication.models import User
 
 
 class JWTAuthentication(authentication.BaseAuthentication):
@@ -32,7 +32,6 @@ class JWTAuthentication(authentication.BaseAuthentication):
             msg = 'Your token is invalid'
             raise exceptions.AuthenticationFailed(msg)
 
-        print(auth_header)
         prefix = auth_header[0].decode('utf-8')
         token = auth_header[1].decode('utf-8')
 

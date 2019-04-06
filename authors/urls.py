@@ -24,5 +24,7 @@ app_name = "authors-haven"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('swagger-docs/', schema_view),
-    path('api/', include('authors.apps.authentication.urls')),
+    path('api/v1/', include('authors.apps.authentication.urls')),
+    path('api/social/', include('authors.apps.social_auth.urls',)),
+
 ]

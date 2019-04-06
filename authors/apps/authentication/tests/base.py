@@ -8,10 +8,13 @@ class BaseTest(APITestCase):
     """
     sets up a base class upon which all our test depends on
     """
+
     def setUp(self):
-        self.client= APIClient()
+        self.client = APIClient()
         self.register_url = reverse('register-user')
         self.login_url = reverse('login-user')
+        self.passoword_reset_url = reverse('password-email')
+        self.users = reverse('users')
     
     def _generate_jwt_token(self):
 
@@ -22,10 +25,18 @@ class BaseTest(APITestCase):
             BaseTest.token = response.data["token"]
         return BaseTest.token
 
-    def create_user(self, data):
-        self.client.post(self.register_url, data, format='json')
-        response = self.client.post(self.login_url, data, format='json')
 
+    def create_user(self, datan):
+        response = self.client.post(self.register_url, datan, format='json')
+        self.activate_email = reverse('activate-user',kwargs={
+            'token':response.data['token']
+        })
+        self.client.get(
+            self.activate_email
+        )
+        response = self.client.post(self.login_url, datan, format='json')
+        
         return f'Bearer {response.data["token"]}'
+        
         
     
