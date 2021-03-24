@@ -55,7 +55,7 @@ python-twitter==3.5
 pytz==2018.9
 requests==2.21.0
 requests-oauthlib==1.2.0
-rsa==4.0
+rsa==4.1
 ruamel.yaml==0.15.91
 simplejson==3.16.0
 six==1.12.0
